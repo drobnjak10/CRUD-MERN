@@ -13,7 +13,8 @@ const Login = () => {
     const cookie = new Cookies();
     const navigate = useNavigate()
 
-    const handleClick = async () => {
+    const handleClick = async (e) => {
+        e.preventDefault()
         try {
             const res = await axios.post('http://localhost:5000/api/user/login', {email,password});
 
@@ -33,26 +34,24 @@ const Login = () => {
     }
 
     return (
-        <div id="home">
-            <div className='container'>
-                <div className="row">
-                    <div className="col">
-                        <h2>Login</h2>
-                        {error && <div className='error'>{error}</div>}
-                        <form className="form">
-                            <div className="input-group">
-                                <label htmlFor="email">Email:</label> <br />
-                                <input type="email" placeholder='email' name="email" onChange={e => setEmail(e.target.value)} />
-                            </div>
-                            <div className="input-group">
-                                <label htmlFor="password">Password:</label> <br />
-                                <input type="password" placeholder='password' name="password" onChange={e => setPassword(e.target.value)} />
-                            </div>
-                            <div className="input-group">
-                                <button className='login' onClick={handleClick}>Login</button>
-                            </div>
-                        </form>
-                    </div>
+        <div className="container">
+            <div className="row">
+                <div className="col-md-10 mx-auto">
+                    <h2 className="text-center">Login</h2>
+                    {error && <div className='alert alert-danger'>{error}</div>}
+                    <form action="" className="form w-50 mx-auto">
+                        <div className="mt-3">
+                        <label htmlFor="email">Email:</label> <br />
+                                <input type="email" className='form-control rounded-pill' placeholder='email' name="email" onChange={e => setEmail(e.target.value)} />
+                        </div>
+                        <div className="mt-3">
+                        <label htmlFor="password">Password:</label> <br />
+                                <input type="password" className='form-control rounded-pill' placeholder='password' name="password" onChange={e => setPassword(e.target.value)} />
+                        </div>
+                        <div className="mt-3">
+                        <button className='btn btn-dark form-control rounded-pill' onClick={handleClick}>Login</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

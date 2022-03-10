@@ -7,6 +7,7 @@ import { Navbar } from './components/Navbar';
 import Login from './components/Login';
 import { AuthConsumer } from './context/AuthContext';
 import Register from './components/Register';
+import Landing from './components/Landing';
 
 function App() {
   const {isAuth, role} = AuthConsumer();
@@ -15,7 +16,7 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Landing />} />
           <Route path='/add' element={isAuth && role === 'admin' ?  <Add /> : <Navigate to="/" /> } />
           <Route path='/:id' element={isAuth && role === 'admin' ? <Edit /> : <Navigate to="/" />} />
           <Route path='/login' element={ isAuth ? <Navigate to="/" /> : <Login />  } />

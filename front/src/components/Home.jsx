@@ -31,7 +31,7 @@ const Home = () => {
         const deleteBook = async () => {
             try {
                 const res = await axios.delete(`http://localhost:5000/api/book/${id}`);
-                console.log(res);
+                window.location.reload()
             } catch (error) {
                 
             }
@@ -58,6 +58,7 @@ const Home = () => {
                         <table className='table'>
                             <thead>
                                 <tr>
+                                    <th>Book Avatar</th>
                                     <th>Book Title</th>
                                     <th>Author</th>
                                     <th>Category</th>
@@ -68,6 +69,7 @@ const Home = () => {
                             <tbody>
                                 { books.length > 0 && books.map(book => {
                                     return  <tr key={book._id}>
+                                    <td><img src={`books/${book.avatar}`} alt="" /></td>
                                     <td>{book.name}</td>
                                     <td>{book.author}</td>
                                     <td>{book.category}</td>
@@ -82,7 +84,6 @@ const Home = () => {
                                     </td> }
                                 </tr>
                                 }) }
-                               
                             </tbody>
                         </table>
                     </div>

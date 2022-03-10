@@ -6,10 +6,13 @@ const userRouter = require('./src/routes/userRoutes');
 const bookRouter = require('./src/routes/bookRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
+const path = require('path')
 const cors = require('cors')
 
 dotenv.config();
 
+
+app.use(express.static(path.join(__dirname,'../front/public/books')));
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors())

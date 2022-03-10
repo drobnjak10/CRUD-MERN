@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken')
 const auth = async (req,res,next) => {
     const authorization = req.headers.authorization;
     
+    console.log(authorization)
+    
     if(authorization) {
         const authToken = authorization.split(' ')[1];
         await jwt.verify(authToken, 'mysecret', (err,res) => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Cookies from 'universal-cookie'
 import axios from 'axios'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
     const [error, setError] = useState(false)
@@ -13,19 +13,20 @@ const Register = () => {
     const [repeatPassword, setRepeatPassword] = useState('')
     const navigate = useNavigate()
 
-    const handleClick = async () => {
+    const handleClick = async (e) => {
+        e.preventDefault()
         try {
-            if(password !== repeatPassword) {
+            if (password !== repeatPassword) {
                 setError('Password does not matched!')
                 return
             }
-            const user = {name,lastname,username,email,password}
+            const user = { name, lastname, username, email, password }
 
-            
+
             const res = await axios.post('http://localhost:5000/api/user/register', user);
 
             console.log(res);
-            if(res.data.error) {
+            if (res.data.error) {
                 setError(res.data.error)
                 return
             }
@@ -37,42 +38,46 @@ const Register = () => {
     }
 
     return (
-        <div id="home">
-            <div className='container'>
-                <div className="row">
-                    <div className="col">
-                        <h2>Register</h2>
-                        {error && <div className='error'>{error}</div>}
-                        <div className="form">
-                            <div className="input-group">
-                                <label htmlFor="name">Name:</label> <br />
-                                <input type="text" placeholder='name' name="name" onChange={e => setName(e.target.value)} />
-                            </div>
-                            <div className="input-group">
-                                <label htmlFor="lastname">Lastname:</label> <br />
-                                <input type="text" placeholder='lastname' name="lastname" onChange={e => setLastname(e.target.value)} />
-                            </div>
-                            <div className="input-group">
-                                <label htmlFor="username">Username:</label> <br />
-                                <input type="text" placeholder='username' name="username" onChange={e => setUsername(e.target.value)} />
-                            </div>
-                            <div className="input-group">
-                                <label htmlFor="email">Email:</label> <br />
-                                <input type="email" placeholder='email' name="email" onChange={e => setEmail(e.target.value)} />
-                            </div>
-                            <div className="input-group">
-                                <label htmlFor="password">Password:</label> <br />
-                                <input type="password" placeholder='password' name="password" onChange={e => setPassword(e.target.value)} />
-                            </div>
-                            <div className="input-group">
-                                <label htmlFor="password">Repeat password:</label> <br />
-                                <input type="password" placeholder='password' name="repeatPassword" onChange={e => setRepeatPassword(e.target.value)} />
-                            </div>
-                            <div className="input-group">
-                                <button className='login' onClick={handleClick}>Register</button>
-                            </div>
+        <div className="container">
+            <div className="row">
+                <div className="col-md-10 mx-auto">
+                    <h3 className='text-center'>Register</h3>
+                    {error &&  <div className='alert alert-danger'>{error}</div> }
+                    <form className="form w-50 mx-auto">
+                        <div className="mt-3">
+                            <label htmlFor="name">Name:</label> <br />
+                            <input type="text" placeholder='name' className='form-control rounded-pill'
+                                name="name" onChange={e => setName(e.target.value)} />
                         </div>
-                    </div>
+                        <div className="mt-3">
+                            <label htmlFor="lastname">Lastname:</label> <br />
+                            <input type="text" placeholder='lastname' className='form-control rounded-pill'
+                                name="lastname" onChange={e => setLastname(e.target.value)} />
+                        </div>
+                        <div className="mt-3">
+                            <label htmlFor="email">Email:</label> <br />
+                            <input type="email" placeholder='email' className='form-control rounded-pill'
+                                name="name" onChange={e => setEmail(e.target.value)} />
+                        </div>
+                        <div className="mt-3">
+                            <label htmlFor="username">Username:</label> <br />
+                            <input type="text" placeholder='username' className='form-control rounded-pill'
+                                name="username" onChange={e => setUsername(e.target.value)} />
+                        </div>
+                        <div className="mt-3">
+                            <label htmlFor="password">Password:</label> <br />
+                            <input type="password" placeholder='password' className='form-control rounded-pill'
+                                name="password" onChange={e => setPassword(e.target.value)} />
+                        </div>
+                        <div className="mt-3">
+                            <label htmlFor="repeatPassword">Repeat Password:</label> <br />
+                            <input type="password" placeholder='Repeat Password' className='form-control rounded-pill'
+                                onChange={e => setRepeatPassword(e.target.value)} />
+                        </div>
+                        <div className="mt-3">
+                            <button className='btn btn-dark rounded-pill form-control' onClick={handleClick}>Register</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
