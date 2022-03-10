@@ -15,14 +15,14 @@ bookRouter.get('/', async (req,res) => {
 })
 
 bookRouter.post('/create', async(req,res) => {
+    console.log(req.body)
     try {
         const book = new Book(req.body);
         await book.save();
-        
         res.json(book)
 
     } catch (error) {
-        res.json(error.message)
+        res.json({error: error.message})
     }
 })
 
@@ -36,7 +36,7 @@ bookRouter.put('/edit/:id', async(req,res) => {
     }
 })
 
-bookRouter.get('/:id', auth, async(req,res) => {
+bookRouter.get('/:id', async(req,res) => {
     try {
         const book = await Book.findById(req.params.id)
         res.json(book)

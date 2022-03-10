@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken')
 
 const auth = async (req,res,next) => {
-    const token = req.headers.cookie;
+    const authorization = req.headers.authorization;
     
-    if(token) {
-        const accessToken = token.split('=')[1]
-        await jwt.verify(accessToken, 'mysecret', (err,res) => {
+    if(authorization) {
+        const authToken = authorization.split(' ')[1];
+        await jwt.verify(authToken, 'mysecret', (err,res) => {
             if(err) {
                 console.log(err)
                 res.json(err)
