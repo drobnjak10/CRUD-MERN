@@ -75,12 +75,12 @@
   cursor: pointer;
 }
 
-.col div {
+.col form, .col div {
   width: 50%;
   margin-bottom: 20px;
 }
 
-.col div a.add {
+.col a.add {
   border-radius: 20px;
   padding: 10px 20px;
   color: #fff;

@@ -9,7 +9,7 @@ const Login = () => {
     const [error, setError] = useState(false)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
-    const {setIsAuth} = AuthConsumer();
+    const {setIsAuth, setRole} = AuthConsumer();
     const cookie = new Cookies();
     const navigate = useNavigate()
 
@@ -25,6 +25,7 @@ const Login = () => {
 
             cookie.set('access_token', res.data.token);
             setIsAuth(true)
+            setRole(res.data.role)
             navigate('/')
         } catch (error) {
             console.log(error)
@@ -38,7 +39,7 @@ const Login = () => {
                     <div className="col">
                         <h2>Login</h2>
                         {error && <div className='error'>{error}</div>}
-                        <div className="form">
+                        <form className="form">
                             <div className="input-group">
                                 <label htmlFor="email">Email:</label> <br />
                                 <input type="email" placeholder='email' name="email" onChange={e => setEmail(e.target.value)} />
@@ -50,7 +51,7 @@ const Login = () => {
                             <div className="input-group">
                                 <button className='login' onClick={handleClick}>Login</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -42,7 +42,13 @@ export const Navbar = () => {
                 <div className="right">
                     {/* <Link to='/login'>Login</Link>
                     <Link to='/register'>Register</Link> */}
-                    {isAuth ? <button onClick={logout} className="logout">Logout</button> : <Link to="/login">Login</Link> }
+                    {isAuth ? 
+                        <button onClick={logout} className="logout">Logout</button> : 
+                        <>
+                            <Link to="/login">Login</Link> 
+                            <Link to="/register">Register</Link> 
+                        </>
+                    }
                 </div>
             </div>
         </div>

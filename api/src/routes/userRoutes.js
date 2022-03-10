@@ -18,7 +18,17 @@ userRouter.post('/register', async (req, res) => {
         res.json(user)
 
     } catch (error) {
-        res.json(error.message)
+        res.json({error: error.message})
+    }
+})
+
+userRouter.get('/checkRole', auth, async(req,res) => {
+    try {
+        const role = req.user.role;
+
+        res.json(role);
+    } catch (error) {
+        res.json({error:error.message})
     }
 })
 
