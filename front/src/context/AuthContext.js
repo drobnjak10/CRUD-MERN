@@ -6,20 +6,34 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const [isAuth, setIsAuth] = useState(false);
-    const [role, setRole] = useState(false);
+    const [role, setRole] = useState('admin');
     const cookie = new Cookies();
     const token = cookie.get('access_token')
+    let auth = cookie.get('access_token') ? true : false
+
+
+    const checkAuth = () => {
+        if(!cookie.get('access_token')) {
+            auth = false
+        }
+    }
+
 
     useEffect(() => {
-        if(cookie.get('access_token')) {
-            setIsAuth(true);
-        }
+        // if(cookie.get('access_token')) {
+        //      setIsAuth(true);
+        // }
+
+        // if(localStorage.getItem('access_token')) {
+        //     setIsAuth(true)
+        // }
+
+        checkAuth();
     },[])
 
 
     useEffect(() => {
         const checkRole = async() => {
-            console.log(token)
             try {
                 const res = await axios.get('http://localhost:5000/api/user/checkRole', {
                     headers: {
@@ -35,7 +49,7 @@ export const AuthProvider = ({children}) => {
     },[])
 
  
-    return <AuthContext.Provider value={{isAuth, setIsAuth, role, setRole}} >
+    return <AuthContext.Provider value={{isAuth, setIsAuth, role, setRole, auth}} >
         {children}
     </AuthContext.Provider>
 }

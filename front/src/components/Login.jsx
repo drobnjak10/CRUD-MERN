@@ -24,6 +24,7 @@ const Login = () => {
                 return
             }
 
+            localStorage.setItem('access_token', res.data.token)
             cookie.set('access_token', res.data.token);
             setIsAuth(true)
             setRole(res.data.role)

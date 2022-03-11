@@ -7,7 +7,7 @@ import Cookies from 'universal-cookie'
 const Landing = () => {
     const [books, setBooks] = useState([])
     const [loading, setLoading] = useState(true);
-    const { isAuth, role } = AuthConsumer()
+    const { isAuth, role, auth } = AuthConsumer()
     const cookie = new Cookies()
 
 
@@ -68,7 +68,7 @@ const Landing = () => {
                                 <th>Category</th>
                                 <th>Author</th>
                                 <th>Price</th>
-                                { isAuth && role === 'admin' && <th>Actions</th> }
+                                { auth && role === 'admin' && <th>Actions</th> }
                             </tr>
                         </thead>
                         <tbody>
@@ -80,7 +80,7 @@ const Landing = () => {
                                     <td>{book.author}</td>
                                     <td>{book.category}</td>
                                     <td>${book.price}</td>
-                                    {isAuth && role === 'admin' && <td>
+                                    {auth && role === 'admin' && <td>
                                         <Link to={`/${book._id}`} className='btn btn-warning rounded-pill text-white'>
                                             Edit
                                         </Link>

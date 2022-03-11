@@ -71,7 +71,7 @@ const Edit = () => {
     }
 
     if (loading || !book) {
-        return <>load</>
+        return <></>
     }
 
     return (

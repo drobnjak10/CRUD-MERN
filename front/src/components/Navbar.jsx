@@ -6,7 +6,7 @@ import { AuthConsumer } from '../context/AuthContext'
 
 export const Navbar = () => {
     const cookie = new Cookies()
-    const { isAuth } = AuthConsumer()
+    const { isAuth, auth } = AuthConsumer()
 
 
 
@@ -42,7 +42,7 @@ export const Navbar = () => {
                 </button>
                 <div class="collapse navbar-collapse ms-auto" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        {isAuth ?
+                        {auth ?
                             <>
                                 <li className="nav-item">
                                     <Link to="/add" className='add nav-link text-white'>Add book</Link>

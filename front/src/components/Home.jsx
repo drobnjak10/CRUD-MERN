@@ -7,7 +7,7 @@ import { AuthConsumer } from '../context/AuthContext'
 const Home = () => {
     const [books, setBooks] = useState([])
     const [loading, setLoading] = useState(true);
-    const {isAuth, role} = AuthConsumer()
+    const {isAuth, role, auth} = AuthConsumer()
 
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const Home = () => {
         deleteBook();
     }
 
-    
+    console.log(auth, role)
     
     if(loading) {
         return <div>
@@ -74,7 +74,7 @@ const Home = () => {
                                     <td>{book.author}</td>
                                     <td>{book.category}</td>
                                     <td>${book.price}</td>
-                                    { isAuth && role === 'admin' && <td>
+                                    { auth && role === 'admin' && <td>
                                         <Link to={`/${book._id}`} className='edit'>
                                             Edit
                                         </Link>
